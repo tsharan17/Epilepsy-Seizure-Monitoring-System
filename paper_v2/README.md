@@ -1,6 +1,7 @@
 # ICLT 2026 paper — revised version (paper_v2)
 
-* `iclt2026_revised.pdf` — compiled paper (6 pages incl. references, US letter, IEEEtran conference).
+* `iclt2026_revised.pdf` — compiled paper (6 pages incl. references, US letter, IEEEtran conference). **Submit this one.**
+* `iclt2026_4page.pdf` (`main4.tex`) — 4-page version, only for the TCE / associated-journal route.
 * `SUBMISSION_AUDIT.md` — submission rules, change log, claim-by-claim audit, dataset accounting,
   unresolved issues, checklist, reviewer-risk assessment.
 * The original manuscript is untouched in `../paper/`.
@@ -14,6 +15,8 @@ All numbers are macros in `numbers.tex`. To rebuild from the evaluation outputs
 ```
 python ../evaluation/rigor.py   --results <R> --channel FP1-FP2     # also FP1-F7, FP2-F8
 python ../evaluation/ingrid.py  <R>
+python ../evaluation/variants.py --results <R> --summaries <dir with chbXX-summary.txt>
+python ../evaluation/fusion.py   --results <R>
 python make_numbers.py <R>      # add hw_robustness.json to <R> to enable Table IV
 python make_figures.py <R>
 ```

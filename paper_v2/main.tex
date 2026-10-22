@@ -20,7 +20,7 @@
 
 \begin{document}
 
-\title{A Low-Cost Single-Channel EEG Seizure Alarm: Code-Faithful Evaluation and an Embedded Baseline-Ratio Detector}
+\title{A Low-Cost Single-Channel EEG Seizure Alarm: Code-Faithful Evaluation and a Hardware-Robust Embedded Detector}
 
 \author{
 \IEEEauthorblockN{Sharan Tangalapally}
@@ -38,7 +38,7 @@ vedantimr@gmail.com}
 \pilotbanner
 
 \begin{abstract}
-Low-cost biopotential amplifiers and Wi-Fi microcontrollers make home EEG seizure alarms easy to build, but the detection logic shipped with such devices is rarely tested against annotated EEG. We describe an open-source, single-channel (FP1--FP2) monitor built from an EXG BioAmp Pill front-end and an ESP32. It raises alarms locally and serves a phone app over its own Wi-Fi access point. We evaluate its shipped detection code by \emph{code-faithful replay}: CHB-MIT recordings (\NSubj{} subjects, \NSz{} seizures, \NHours{}~h) are converted exactly to the device montage, passed through a nominal model of the analog front-end and fed to the unmodified analyzer and a line-by-line port of the firmware under a simulated clock. Under subject-level cross-validation with an empirical chance baseline, the shipped analyzer detected \PyBSens{} of seizures at \PyBFAh{} false alarms per hour (FA/h). The firmware detector's \FwBSens{} sensitivity at \FwBFAh{}~FA/h was largely explained by its alarm rate (chance level \FwBNull{}). We trace these failures to short-memory adaptation, gain-dependent absolute thresholds and a feature vote dominated by uninformative features. Normalizing the deviation signal the firmware already computes by its own delayed running median, and requiring 20~s of persistence (DEV-BR), detected \DevASens{} of seizures (95\% CI \DevACI{}) at \DevAFAh{}~FA/h in held-out subjects. DEV-BR outperformed the shipped analyzer in \TestDevPyBetter{} of \TestDevPyN{} subjects and underperformed in none. A 2.5-KB C++ implementation reproduces the evaluation exactly but has not yet been deployed on the device. Performance remains well below that of clinically validated wearables, and no bench or human recordings from the device are reported.
+Low-cost biopotential amplifiers and Wi-Fi microcontrollers make home EEG seizure alarms easy to build, but the detection logic shipped with such devices is rarely tested against annotated EEG. We describe an open-source, single-channel (FP1--FP2) monitor built from an EXG BioAmp Pill front-end and an ESP32. It raises alarms locally and serves a phone app over its own Wi-Fi access point. We evaluate its shipped detection code by \emph{code-faithful replay}: CHB-MIT recordings (\NSubj{} subjects, \NSz{} seizures, \NHours{}~h) are converted exactly to the device montage, passed through a nominal model of the analog front-end and fed to the unmodified analyzer and a line-by-line port of the firmware under a simulated clock. Under subject-level cross-validation with an empirical chance baseline, the shipped analyzer detected \PyBSens{} of seizures at \PyBFAh{} false alarms per hour (FA/h). The firmware detector's \FwBSens{} sensitivity at \FwBFAh{}~FA/h was largely explained by its alarm rate (chance level \FwBNull{}). We trace these failures to short-memory adaptation, gain-dependent absolute thresholds and a feature vote dominated by uninformative features. Normalizing the deviation signal the firmware already computes by its own delayed running median, and requiring 20~s of persistence (DEV-BR), detected \DevASens{} of seizures (95\% CI \DevACI{}) at \DevAFAh{}~FA/h in held-out subjects. DEV-BR outperformed the shipped analyzer in \TestDevPyBetter{} of \TestDevPyN{} subjects and underperformed in none. With its parameters frozen, its sensitivity stayed between \HwDevSensMin{} and \HwDevSensMax{} across amplifier gains of 500--2000, op-amp clipping, a reduced ADC range and a slower sampling loop. Under the same changes, the shipped firmware's sensitivity ranged from \HwFwSensMin{} to \HwFwSensMax{} and its false-alarm rate from \HwFwFAMin{} to \HwFwFAMax{}~FA/h. Neither richer decision rules nor learned classifiers (logistic regression, gradient-boosted trees) consistently outperformed this simple rule, which needs 2.5~KB of RAM and is reproduced exactly by a C++ implementation. The result is a firmware-only upgrade that makes the alarm meaningful and robust to hardware non-idealities. It is not yet deployed on the device, its performance remains below that of clinically validated wearables, and no bench or human recordings are reported.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -61,7 +61,7 @@ Open biopotential front-ends~\cite{frey2016openbci,bioamp} and Wi-Fi microcontro
 \item \textbf{A built prototype}: a battery-powered FP1--FP2 EEG monitor with ESP32 firmware, a desktop analyzer and an offline Wi-Fi alert path (Sec.~\ref{sec:system}).
 \item \textbf{Code-faithful replay}: the unmodified analyzer and a line-by-line firmware port are run on public EEG converted exactly to the device montage, under a simulated clock. Scoring is event-based, with subject-level validation and an empirical null (Sec.~\ref{sec:method}).
 \item \textbf{A diagnosis} of why the shipped detectors fail, at the level of features and design choices (Sec.~\ref{sec:diag}).
-\item \textbf{DEV-BR}: a delayed-median ratio rule on the firmware's existing deviation signal, evaluated on held-out subjects, with ablations and a 2.5-KB C++ implementation verified against the evaluation code. It has not yet been deployed on the device (Sec.~\ref{sec:devbr}).
+\item \textbf{DEV-BR}: a delayed-median ratio rule on the firmware's existing deviation signal, robust in simulation to gain, clipping, ADC-range and sampling-rate deviations, and implemented in 2.5~KB of verified C++ (not yet deployed). Richer rules and learned classifiers did not beat it (Sec.~\ref{sec:devbr}).
 \end{enumerate}
 
 % =============================================================================
@@ -90,7 +90,7 @@ Alarm outputs & RGB LED, 500-ms GPIO pulse, REST \texttt{/status} & firmware \\
 Network & ESP32 access point; \texttt{/status}, \texttt{/eeg}, \texttt{/simulate} & firmware \\
 Detectors & firmware state machine; 3-feature analyzer & code; replay-evaluated \\
 Companion app & Android client of the REST API & binary only; not evaluated \\
-DEV-BR & C++ header, 2.5~KB RAM & verified offline; not deployed \\
+DEV-BR & C++ header, 2.5~KB RAM & verified offline; robustness simulated; not deployed \\
 Bench data & noise, battery life, cost & not measured \\
 \bottomrule
 \end{tabular}
@@ -154,23 +154,23 @@ The alarm fires on the first second the condition holds, and alarms within 90~s 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/devbr_example.png}
+\includegraphics[width=0.9\columnwidth]{figures/devbr_example.png}
 \caption{DEV-BR on a seizure in chb01 (shaded). Top: the per-second deviation and its delayed median baseline. Bottom: their ratio, the modal held-out threshold, and the alarm.}
 \label{fig:example}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/operating_curve.png}
+\includegraphics[width=0.88\columnwidth]{figures/operating_curve.png}
 \caption{Sensitivity versus FA/h on FP1--FP2. Lines: the best trade-off over all ratio settings, in-sample. Diamonds: DEV-BR on held-out subjects. Markers: the shipped detectors, with dashes at their circular-shift chance levels.}
 \label{fig:roc}
 \end{figure}
 
-\textbf{Results.} On held-out subjects, DEV-BR detected \DevADet{}/\NSz{} seizures (\DevASens{}, CI \DevACI{}; subject-macro \DevAMacro{}) at \DevAFAh{}~FA/h, with a median latency of \DevALat{}~s (Table~\ref{tab:main}, Figs.~\ref{fig:example}--\ref{fig:roc}). The most frequent choice across folds was $r{=}\DevAR$, $D{=}\DevAD$~s (\DevAModeCount{} of \DevAFolds{} folds). Stricter targets gave \DevBSens{} at \DevBFAh{}~FA/h and \DevCSens{} at \DevCFAh{}~FA/h. At a false-alarm rate comparable to the analyzer's BLACKOUT alarm, DEV-BR detected about \FoldDevPy{} times as many seizures. It did better in \TestDevPyBetter{} of \TestDevPyN{} subjects, worse in \TestDevPyWorse{} and tied in \TestDevPyTies{} (\TestDevPyP{}). It also outperformed LL-BR (\TestDevLlBetter{} better, \TestDevLlWorse{} worse, \TestDevLlP{}). Its circular-shift chance level was \DevANull{} (\DevANullP{}). The original 2-fold split gave \TwoDevASens{} at \TwoDevAFAh{}~FA/h. Excluding the \NColdStart{} seizures that start before the 330-s warm-up raises sensitivity to \DevASensWarm{}. On the secondary channels, DEV-BR detected \DevSensOne{} (FP1-F7) and \DevSensTwo{} (FP2-F8) at $\le$1~FA/h, but its advantage over LL-BR there was not significant (\SecLlPOne{}, \SecLlPTwo{}; Table~\ref{tab:abl}). Fig.~\ref{fig:pp} shows that the improvement is spread across subjects.
+\textbf{Results.} On held-out subjects, DEV-BR detected \DevADet{}/\NSz{} seizures (\DevASens{}, CI \DevACI{}; subject-macro \DevAMacro{}) at \DevAFAh{}~FA/h, with a median latency of \DevALat{}~s (Table~\ref{tab:main}, Figs.~\ref{fig:example}--\ref{fig:roc}). The most frequent choice across folds was $r{=}\DevAR$, $D{=}\DevAD$~s (\DevAModeCount{} of \DevAFolds{} folds). Stricter targets gave \DevBSens{} at \DevBFAh{}~FA/h and \DevCSens{} at \DevCFAh{}~FA/h. At a false-alarm rate comparable to the analyzer's BLACKOUT alarm, DEV-BR detected about \FoldDevPy{} times as many seizures. It did better in \TestDevPyBetter{} of \TestDevPyN{} subjects, worse in \TestDevPyWorse{} and tied in \TestDevPyTies{} (\TestDevPyP{}). It also outperformed LL-BR (\TestDevLlBetter{} better, \TestDevLlWorse{} worse, \TestDevLlP{}). Its circular-shift chance level was \DevANull{} (\DevANullP{}). The original 2-fold split gave \TwoDevASens{} at \TwoDevAFAh{}~FA/h. Excluding the \NColdStart{} seizures that start before the 330-s warm-up raises sensitivity to \DevASensWarm{}. On the secondary channels, DEV-BR detected \DevSensOne{} (FP1-F7) and \DevSensTwo{} (FP2-F8) at $\le$1~FA/h, but its advantage over LL-BR there was not significant (\SecLlPOne{}, \SecLlPTwo{}; Table~\ref{tab:abl}).
 
 \begin{table}[t]
 \centering
-\caption{Top: DEV-BR ablations (LOSO, FP1--FP2), sensitivity / FA/h at the $\le$1 and $\le$0.5~FA/h targets. Bottom: secondary channels at $\le$1~FA/h.}
+\caption{Top: DEV-BR ablations and alternative detectors (all LOSO, FP1--FP2; learned models use inner cross-validation for thresholds), sensitivity / FA/h at the $\le$1 and $\le$0.5~FA/h targets. Bottom: secondary channels at $\le$1~FA/h.}
 \label{tab:abl}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -195,44 +195,41 @@ Channel & Analyzer (any) & Firmware & LL-BR & DEV-BR \\
 
 \textbf{Ablations.} Normalization is the essential ingredient: thresholding the raw deviation, with the threshold also chosen by LOSO, detected only \AblAbsSens{} at a similar FA/h (Table~\ref{tab:abl}). Removing the lag cost sensitivity at the stricter target (\AblLagZeroSensB{}), and a 600-s window performed worse than 60--300~s. A mean baseline performed about as well as the median (\AblMeanSens{}), so the median offers robustness to outliers rather than a performance gain.
 
+\textbf{Is a more complex detector better?} We tested k-of-n persistence, a dual time-scale rule, a baseline carried across contiguous recordings, and learned classifiers on 14 baseline-normalized features: logistic regression (an embedded-friendly dot product) and gradient-boosted trees. Their thresholds were chosen by inner cross-validation within each training fold. None consistently beat DEV-BR (Table~\ref{tab:abl}). Boosted trees were better at the stricter target (\GbmHalfSens{} versus \DevBSens{}; \GbmHalfBetter{} subjects better, \GbmHalfWorse{} worse, \GbmHalfP{}) and worse at $\le$1~FA/h, at a far higher computational cost. On one forehead channel, the simplest rule already sits at the information limit of the signal, so further gains must come from sensing, such as a second electrode, rather than from the algorithm.
+
 \ifnum\HwAvailable=1
 \begin{table}[t]
 \centering
-\caption{Front-end robustness of DEV-BR (FP1--FP2, simulated). ``Fixed'': parameters chosen at gain 1000 ($r{=}\HwFixR$, $D{=}\HwFixD$~s) applied unchanged. Cells: sensitivity / FA/h.}
+\caption{Front-end robustness of DEV-BR (FP1--FP2, simulated). ``Fixed'': parameters chosen at gain 1000 ($r{=}\HwFixR$, $D{=}\HwFixD$~s) applied unchanged. LM358 clip: 1.8-V output ceiling; Sat.: saturated samples. Cells: sensitivity / FA/h.}
 \label{tab:hw}
 \footnotesize
-\setlength{\tabcolsep}{2pt}
+\setlength{\tabcolsep}{1.5pt}
 \begin{tabular}{lcccc}
 \toprule
-Condition & Saturated & DEV-BR fixed & DEV-BR LOSO & Firmware \\
+Condition & Sat. & DEV-BR fixed & DEV-BR LOSO & Firmware \\
 \midrule
 \HwTableBody
 \bottomrule
 \end{tabular}
 \end{table}
-\textbf{Front-end robustness.} Table~\ref{tab:hw} repeats the evaluation under different gains, the LM358 output ceiling, the ESP32's default ADC range and a slower sampling loop, with DEV-BR parameters frozen at gain 1000.
+\textbf{Front-end robustness.} Table~\ref{tab:hw} reruns the firmware stage under different gains, the LM358 output ceiling, the ESP32's default ADC range and a 6-ms loop, with DEV-BR's parameters frozen at gain 1000. DEV-BR's sensitivity stayed within \HwDevSensMin{}--\HwDevSensMax{} at \HwDevFAMin{}--\HwDevFAMax{}~FA/h, and it was identical (\HwGainSens{}) at gains of 500, 1000 and 2000. Even at gain 2000 with the LM358 ceiling, where \HwClipSat{} of samples saturated, it detected \HwClipSens{}. The shipped firmware's operating point moved between \HwFwSensMin{} and \HwFwSensMax{} sensitivity and \HwFwFAMin{}--\HwFwFAMax{}~FA/h.
 \else
 \textbf{Front-end robustness.} The scale argument above has not yet been confirmed by rerunning DEV-BR at gains of 500 and 2000, under the LM358 output ceiling, or at a slower sampling rate. The released add-on notebook performs these runs. For the shipped detectors, firmware false alarms changed from \FwBFAhLowGain{} to \FwBFAhHighGain{}~FA/h between gains of 500 and 2000.
 \fi
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{figures/per_patient.png}
-\caption{Per-subject sensitivity on FP1--FP2 (chb01 and chb21 pooled) for the shipped analyzer (any alarm), DEV-BR at $\le$1~FA/h (held-out) and the shipped firmware detector. The legend gives each detector's pooled FA/h.}
-\label{fig:pp}
-\end{figure*}
+
 
 % =============================================================================
 \section{Discussion and Limitations}
-Code-faithful replay changed how the prototype's alarms should be described. Its on-device detector mostly fires at random, and the analyzer's ``pre-ictal'' BROWNOUT state is a low-confidence warning with no demonstrated predictive value. The improvement needs no new sensing, only a different decision rule on a signal the firmware already computes.
+Code-faithful replay changed how the prototype's alarms should be described, and it showed how to fix them. The shipped on-device detector mostly fires at random, and the analyzer's ``pre-ictal'' BROWNOUT state has no demonstrated predictive value. A different decision rule on a signal the firmware already computes turns the alarm into a significant, hardware-robust detector at about one false alarm per hour, with no new sensing or hardware cost. Three principles generalize to other low-cost biosignal devices: validate the code that ships rather than a re-implementation; normalize against the wearer's own delayed background so that decisions are invariant to gain and front-end tolerances; and stop adding algorithmic complexity once held-out tests show the signal is the bottleneck.
 
 The absolute numbers matter as much as the relative gain. About half of seizures at roughly one false alarm per hour (about 23 per day) is far from the 0.2--0.67 false alarms per day of wearables validated in phase-3 studies for tonic--clonic seizures~\cite{beniczky2021guideline}. It is also below multichannel patient-specific detectors~\cite{shoeb2010icml}. The device is a research prototype, not a medical device, and these results support no clinical claim.
 
-The study has several limitations. (i)~All results come from software replay of a pediatric dataset recorded with clinical amplifiers; no recordings from the prototype are reported. (ii)~The front-end model uses nominal, unmeasured gain and pass-band values, and it omits LM358 headroom, ADC nonlinearity, sampling jitter, electrode impedance, motion and mains interference. (iii)~The BioAmp is powered at 3.3~V, below its documented 5-V use. (iv)~Each recording starts cold, which penalizes the \NColdStart{} seizures that begin in the first 330~s; continuous wear would not have this problem. (v)~A forehead channel cannot see every seizure. (vi)~CHB-MIT subjects contribute unequal numbers of seizures (chb12: 40), hence the macro averages. (vii)~DEV-BR runs offline only, and the access point uses a fixed password. The next steps, in order, are bench characterization (noise, gain, sampling rate, battery life), deploying DEV-BR on the device, replacing the LM358 with a rail-to-rail buffer, and a supervised recording study under ethics approval.
+The study has several limitations. (i)~All results come from software replay of a pediatric dataset recorded with clinical amplifiers; no recordings from the prototype are reported. (ii)~The front-end model uses nominal, unmeasured gain and pass-band values. LM358 clipping, ADC range and sampling rate were tested only in simulation, and ADC nonlinearity, timing jitter, electrode impedance, motion and mains interference are not modelled. (iii)~The BioAmp is powered at 3.3~V, below its documented 5-V use. (iv)~Each recording starts cold, which penalizes the \NColdStart{} seizures that begin in the first 330~s; continuous wear would not have this problem. (v)~A forehead channel cannot see every seizure. (vi)~CHB-MIT subjects contribute unequal numbers of seizures (chb12: 40), hence the macro averages. (vii)~DEV-BR runs offline only, and the access point uses a fixed password. The next steps, in order, are bench characterization (noise, gain, sampling rate, battery life), deploying DEV-BR on the device, replacing the LM358 with a rail-to-rail buffer, and a supervised recording study under ethics approval.
 
 % =============================================================================
 \section{Conclusion}
-We built a low-cost single-channel EEG seizure alarm and evaluated its shipped detection code as written, by replaying \NSubj{} subjects of annotated EEG through a model of its front-end. The shipped detectors fail for identifiable reasons: short-memory adaptation, gain-dependent thresholds and a vote dominated by uninformative features. A delayed-median ratio rule on a signal the firmware already computes detected \DevASens{} of seizures at \DevAFAh{}~FA/h on held-out subjects, a significant improvement that fits in 2.5~KB of RAM, though still far from clinical performance. Hardware, firmware, analyzer, replay benchmark and the C++ detector are released for others to reproduce and extend.
+We built a low-cost single-channel EEG seizure alarm and evaluated its shipped detection code as written, by replaying \NSubj{} subjects of annotated EEG through a model of its front-end. The shipped detectors fail for identifiable reasons: short-memory adaptation, gain-dependent thresholds and a vote dominated by uninformative features. A firmware-only upgrade, DEV-BR, fixes these. It detected \DevASens{} of seizures at \DevAFAh{}~FA/h on held-out subjects, about \FoldDevPy{} times the shipped analyzer at a comparable false-alarm rate. It kept that performance essentially unchanged across a fourfold range of amplifier gain and under clipping, ADC-range and timing deviations, and it fits in 2.5~KB of RAM. More complex detectors did not improve on it, so the next gains will come from additional sensing, which together with clinical-grade false-alarm rates remains future work. Hardware, firmware, analyzer, replay benchmark and the C++ detector are released for others to reproduce and extend.
 
 \section*{Data and Code Availability}
 CHB-MIT is available from PhysioNet~\cite{goldberger2000physionet}. Firmware, analyzer, schematics, the replay benchmark (with Kaggle notebooks) and the DEV-BR C++ header are at~\cite{vera_repo}. The companion app is distributed there as a binary.

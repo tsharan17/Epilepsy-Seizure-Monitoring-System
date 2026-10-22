@@ -204,6 +204,13 @@ FUSE-BR, $\le$1 FA/h & 78/194 & 40.2\% [24--64] & 56.0\% & 0.96 & 21.5 & -- \\
 \textbf{DEV-BR, $\le$0.5 FA/h} & 81/194 & 41.8\% [26--65] & 59.5\% & 0.46 & 23.0 & 3.9\% \\
 \textbf{DEV-BR, $\le$0.2 FA/h} & 55/194 & 28.4\% [15--49] & 46.1\% & 0.16 & 29.0 & -- \\
 }
+\newcommand{\AltBestOneSens}{51.0\%}
+\newcommand{\AltBestHalfSens}{44.3\%}
+\newcommand{\GbmOneSens}{47.9\%}
+\newcommand{\GbmHalfSens}{44.3\%}
+\newcommand{\GbmHalfBetter}{4}
+\newcommand{\GbmHalfWorse}{2}
+\newcommand{\GbmHalfP}{$p{=}0.25$}
 \newcommand{\AblationTableBody}{%
 \textbf{reference} (300 s, lag 30 s, median) & 52.1\% / 0.97 & 41.8\% / 0.46 \\
 no lag (0 s) & 50.5\% / 0.79 & 34.5\% / 0.42 \\
@@ -214,6 +221,13 @@ window 120 s & 53.1\% / 0.88 & 38.1\% / 0.43 \\
 window 600 s & 41.2\% / 0.94 & 34.0\% / 0.47 \\
 mean instead of median & 50.0\% / 0.78 & 41.2\% / 0.35 \\
 no normalization (absolute) & 32.5\% / 0.83 & 30.4\% / 0.42 \\
+\midrule
+k-of-n persistence & 43.3\% / 0.95 & 36.6\% / 0.38 \\
+dual time-scale rule & 51.0\% / 1.01 & 42.8\% / 0.49 \\
+baseline carried across files & 48.5\% / 0.97 & 41.8\% / 0.46 \\
+log.\ regression, firmware features & 43.3\% / 1.03 & 35.1\% / 0.44 \\
+log.\ regression, all features & 43.8\% / 0.90 & 38.7\% / 0.47 \\
+boosted trees, all features & 47.9\% / 1.01 & 44.3\% / 0.50 \\
 }
 \newcommand{\AblAbsSens}{32.5\%}
 \newcommand{\AblLagZeroSensB}{34.5\%}
@@ -229,5 +243,26 @@ no normalization (absolute) & 32.5\% / 0.83 & 30.4\% / 0.42 \\
 FP1-F7 & 28.3\% / 4.01 & 77.3\% / 24.42 & 33.8\% / 0.95 & 44.4\% / 0.78 \\
 FP2-F8 & 29.3\% / 3.83 & 82.8\% / 24.79 & 27.3\% / 0.89 & 39.9\% / 0.86 \\
 }
-\newcommand{\HwAvailable}{0}
-\newcommand{\HwTableBody}{}
+\newcommand{\HwAvailable}{1}
+\newcommand{\HwTableBody}{%
+$\times$500 & 0.00\% & 52.1\% / 0.98 & 47.9\% / 0.94 & 51.5\% / 7.36 \\
+$\times$1000 (ref.) & 0.00\% & 52.1\% / 0.95 & 52.1\% / 0.97 & 75.3\% / 18.29 \\
+$\times$2000 & 0.01\% & 52.1\% / 0.97 & 50.0\% / 0.96 & 86.1\% / 24.37 \\
+$\times$1000, LM358 clip & 0.52\% & 51.5\% / 0.97 & 48.5\% / 0.96 & 73.2\% / 18.01 \\
+$\times$2000, LM358 clip & 2.69\% & 50.0\% / 0.93 & 50.0\% / 0.93 & 82.0\% / 23.09 \\
+$\times$1000, 3.1-V ADC & 0.00\% & 52.1\% / 0.96 & 50.5\% / 0.98 & 78.9\% / 19.22 \\
+$\times$1000, 167-Hz loop & 0.00\% & 51.5\% / 0.95 & 51.5\% / 0.96 & 45.9\% / 14.74 \\
+}
+\newcommand{\HwFixR}{1.25}
+\newcommand{\HwFixD}{20}
+\newcommand{\HwDevSensMin}{50.0\%}
+\newcommand{\HwDevSensMax}{52.1\%}
+\newcommand{\HwDevFAMin}{0.93}
+\newcommand{\HwDevFAMax}{0.98}
+\newcommand{\HwFwSensMin}{45.9\%}
+\newcommand{\HwFwSensMax}{86.1\%}
+\newcommand{\HwFwFAMin}{7.36}
+\newcommand{\HwFwFAMax}{24.37}
+\newcommand{\HwGainSens}{52.1\%}
+\newcommand{\HwClipSat}{2.7\%}
+\newcommand{\HwClipSens}{50.0\%}

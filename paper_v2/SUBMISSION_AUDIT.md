@@ -8,7 +8,7 @@ The previous manuscript (`paper/main.tex`, `paper/iclt2026_paper.pdf`) is preser
 | Item | Official rule | Consequence |
 |---|---|---|
 | Initial submission length | "2-page, or up to 6-page for full papers and 1page for poster-papers, including appendix, references, and all other contents" | Full paper ≤ 6 pages **including references** → revised paper is exactly 6. |
-| 4-page rule | Final version limited to 4 pages "if you are selected to submit the paper to the Transactions on Consumer Electronics or if you intend to submit a full length of your paper to any of the Associated Journals. Otherwise, the length is up to 6 pages." | Applies only after selection, or if you choose the associated-journal route. **Not applicable to the initial submission.** If you plan an associated-journal submission, tell me and I will make a 4-page version. |
+| 4-page rule | Final version limited to 4 pages "if you are selected to submit the paper to the Transactions on Consumer Electronics or if you intend to submit a full length of your paper to any of the Associated Journals. Otherwise, the length is up to 6 pages." | Applies only after selection, or if you choose the associated-journal route. **Not applicable to the initial submission.** A 4-page version (`main4.tex` → `iclt2026_4page.pdf`) is ready for that case; submit the 6-page paper now. |
 | Template / paper size | IEEE conference template (Word or LaTeX), US letter, no author biographies | Met (`IEEEtran` conference, letterpaper). |
 | Review anonymity | Authors need not remove names | Names kept. |
 | PDF | Initial: no PDF eXpress needed. Final: PDF eXpress (Conference ID **67443X**) then upload to EDAS; IEEE copyright form via EDAS | Do this at camera-ready. |
@@ -43,6 +43,12 @@ The previous manuscript (`paper/main.tex`, `paper/iclt2026_paper.pdf`) is preser
 | 21 | **Dataset description corrected**: "24 cases, mostly pediatric, 1.5–22 y"; chb24 has no subject info; seizure-free files are one per case (two for chb01, none for chb24). | Matches PhysioNet and the data actually used. |
 | 22 | **Secondary-channel results now LOSO**, and the paper states that DEV-BR's advantage over LL-BR is **not significant** on FP1-F7/FP2-F8 (p ≈ 0.06). | Honest reporting. |
 | 23 | **In-sample trade-off curve recomputed** on the CV grid. | Previously the held-out point lay above the in-sample frontier, which is impossible on a consistent grid. |
+| 24 | **Hardware-robustness results added (Table IV)** from the Kaggle add-on run: gains ×500/×1000/×2000, LM358 1.8-V ceiling at ×1000 and ×2000, 3.1-V ADC range, 166.7-Hz loop. DEV-BR with frozen parameters: 50.0–52.1 % at 0.93–0.98 FA/h. Shipped firmware: 45.9–86.1 % at 7.36–24.37 FA/h. | Resolves former E2. Simulation only; stated as such. |
+| 25 | **Title** → "…Code-Faithful Evaluation and a Hardware-Robust Embedded Detector". | "Hardware-robust" is now supported by Table IV (in simulation; the text says so). |
+| 26 | **Alternative detectors tested and reported** (Table III, bottom): k-of-n persistence, dual time-scale rule, baseline carried across contiguous files, logistic regression (firmware-only and all features), gradient-boosted trees, all LOSO with inner-CV thresholds (`evaluation/variants.py`, `evaluation/fusion.py`). None consistently beat DEV-BR; boosted trees 44.3 % vs 41.8 % at ≤0.5 FA/h, not significant (4 better / 2 worse, p = 0.25), worse at ≤1 FA/h. | Requested attempt at a stronger classifier; reported whether or not it helped. |
+| 27 | **Design principles** stated in the Discussion (validate shipped code; normalize to the wearer's delayed background; stop adding complexity once the signal is the bottleneck), and a positive but bounded conclusion. | Requested framing; every statement backed by Tables II–IV, limitations unchanged. |
+| 28 | **Per-subject figure removed** from the 6-page paper to make room for Table IV (the per-subject Wilcoxon counts remain in the text). | Page limit. |
+| 29 | **4-page version** `main4.tex` added (same `numbers.tex` / `refs.bib`; 11 references; no feature-distribution figure, shorter related work and limitations). | Only needed for the TCE / associated-journal route. |
 
 ## D. Experimental audit table
 
@@ -88,10 +94,10 @@ The previous manuscript (`paper/main.tex`, `paper/iclt2026_paper.pdf`) is preser
 ## E. Unresolved issues (need you or another run)
 
 1. **Push the new code to GitHub before submitting.** The paper's data-availability statement points to the repo, but `evaluation/`, `firmware_devbr/` and `paper_v2/` are currently untracked locally.
-2. **Run `evaluation/vera_hw_robustness.ipynb` on Kaggle** (Internet on; ~20–40 min). It measures DEV-BR at gains ×500/×2000, under the LM358 ceiling, with a 3.1-V ADC range and with 166-Hz sampling, using frozen parameters. Send me `vera_hw_results.zip`; the paper then shows Table IV automatically.
+2. ~~Run the hardware-robustness notebook~~ — **done** (change log #24).
 3. **Bench measurements** (optional for the initial submission, strongly recommended): actual sampling rate (count samples per `millis()` second), input-referred noise with shorted inputs, the BioAmp output DC level at 3.3 V, and the LM358 output ceiling. If measured, I'll add them; if not, the paper already says "not measured".
 4. **Decide whether to fix the LM358 issue now** (e.g., a rail-to-rail buffer such as MCP6002, or remove the buffer). If changed, the paper's hardware description must change too.
-5. **Author decision on the 4-page route**: only needed if you intend to send the full paper to an associated journal.
+5. **4-page route**: version prepared (`iclt2026_4page.pdf`); use only if selected for TCE or if you choose an associated journal.
 6. **Acknowledgment**: add a guide or funding source if applicable. Keep the AI-use disclosure, which IEEE requires.
 7. **Companion app**: either publish the Flutter source or keep the paper's "binary only; not evaluated".
 8. **Optional strengthening** (not done): continuous multi-file replay to remove the cold-start penalty; comparison with one published lightweight detector (e.g., a Gotman-style detector); a hardware-in-the-loop replay through the ESP32 (DAC → ADC).
@@ -106,7 +112,7 @@ The previous manuscript (`paper/main.tex`, `paper/iclt2026_paper.pdf`) is preser
 - [x] No placeholder text or [TODO] in the PDF (checked)
 - [x] AI-use disclosure in the Acknowledgment
 - [ ] Code pushed to GitHub so the data-availability statement is true
-- [ ] (Recommended) hardware-robustness add-on run and Table IV regenerated
+- [x] Hardware-robustness add-on run and Table IV regenerated
 - [x] Fonts embedded (checked with `pdffonts`; all Type 1, embedded). PDF eXpress is only required at the final stage
 - [ ] Submit on EDAS (https://edas.info/N35554) before 30 Oct 2026
 - [ ] Final stage: PDF eXpress (ID 67443X) → EDAS upload → IEEE copyright form
@@ -119,6 +125,6 @@ Most likely reasons for rejection, most serious first:
 3. **Limited novelty of DEV-BR.** Baseline-normalized line-length is prior art (Logesparan 2011/2015). A reviewer may see DEV-BR as an incremental application. *Mitigation:* the novelty is reframed around code-faithful evaluation plus an embedded, verified implementation.
 4. **Hardware design questions.** LM358 headroom at 3.3 V and BioAmp operation below its documented supply may draw criticism. *Mitigation:* disclosed; the add-on quantifies clipping sensitivity in simulation.
 5. **Dataset fit.** A pediatric, clinical-amplifier dataset and a frontal channel the dataset never recorded directly (reconstructed). *Mitigation:* reconstruction is exact and secondary channels are reported.
-6. **Unmeasured gain invariance** if the add-on isn't run. *Mitigation:* the claim is narrowed in the text.
+6. **Simulated, not measured, robustness.** Table IV is a simulation. *Mitigation:* stated in the caption and limitations; bench item E3 would confirm it.
 
-Overall: the paper is scientifically defensible as written and within the rules, but it is **not fully submission-ready until items E1 (push code) and, ideally, E2 (robustness run) are done**. Acceptance cannot be predicted; the main risks are 1–3, and none can be removed without new measurements.
+Overall: the paper is scientifically defensible as written and within the rules, but it is **not fully submission-ready until item E1 (push code) is done**. Acceptance cannot be predicted; the main risks are 1–3, and none can be removed without new measurements.
