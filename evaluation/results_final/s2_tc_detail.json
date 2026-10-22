@@ -1,0 +1,96 @@
+{
+ "COACT_0.02": {
+  "det": 42,
+  "n": 55,
+  "sens": 0.7636363636363637,
+  "ci": [
+   0.631578947368421,
+   0.8806751128080523
+  ],
+  "n_subj": 37,
+  "lat_median": 72.0,
+  "lat_iqr": [
+   50.5,
+   97.0
+  ],
+  "sleep_det": 20,
+  "sleep_n": 25,
+  "fa_per_day": 0.47891629133462743,
+  "subj_zero_fa": 69,
+  "n_subjects": 125,
+  "median_subject_fa_day": 0.0
+ },
+ "EEG_0.02": {
+  "det": 17,
+  "n": 55,
+  "sens": 0.3090909090909091,
+  "ci": [
+   0.14814814814814814,
+   0.4714484126984126
+  ],
+  "n_subj": 37,
+  "lat_median": 86.0,
+  "lat_iqr": [
+   62.0,
+   99.0
+  ],
+  "sleep_det": 12,
+  "sleep_n": 25,
+  "fa_per_day": 0.4747877026162255,
+  "subj_zero_fa": 63,
+  "n_subjects": 125,
+  "median_subject_fa_day": 0.0
+ },
+ "MOV_0.02": {
+  "det": 13,
+  "n": 55,
+  "sens": 0.23636363636363636,
+  "ci": [
+   0.130414653784219,
+   0.35185185185185186
+  ],
+  "n_subj": 37,
+  "lat_median": 101.0,
+  "lat_iqr": [
+   91.0,
+   120.0
+  ],
+  "sleep_det": 4,
+  "sleep_n": 25,
+  "fa_per_day": 0.4520804646650147,
+  "subj_zero_fa": 84,
+  "n_subjects": 125,
+  "median_subject_fa_day": 0.0
+ },
+ "COACT_0.05": {
+  "det": 46,
+  "n": 55,
+  "sens": 0.8363636363636363,
+  "ci": [
+   0.7058823529411765,
+   0.9433962264150944
+  ],
+  "n_subj": 37,
+  "lat_median": 64.0,
+  "lat_iqr": [
+   44.25,
+   79.0
+  ],
+  "sleep_det": 21,
+  "sleep_n": 25,
+  "fa_per_day": 0.9144824011260343,
+  "subj_zero_fa": 46,
+  "n_subjects": 125,
+  "median_subject_fa_day": 0.2722022866252272
+ },
+ "mcnemar_COACT_vs_EEG_0.02": {
+  "only_coact": 26,
+  "only_other": 1,
+  "p": 4.172325134277344e-07
+ },
+ "mcnemar_COACT_vs_MOV_0.02": {
+  "only_coact": 30,
+  "only_other": 1,
+  "p": 2.9802322387695312e-08
+ }
+}
