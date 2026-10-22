@@ -1,0 +1,287 @@
+{
+  "FP1-F7|py|seizure_alarms": {
+    "seizures": 198,
+    "detected": 14,
+    "sensitivity": 0.0707070707070707,
+    "mean_case_sensitivity": 0.16607142857142856,
+    "hours": 225.47194444444443,
+    "false_alarms": 127,
+    "fa_per_hour": 0.5632629829530406,
+    "fa_per_24h": 13.518311590872973,
+    "latency_median": 29.10000462597236,
+    "latency_iqr": [
+      19.02500371437054,
+      62.62500328978058
+    ],
+    "chance": 0.022939148842137096
+  },
+  "FP1-F7|py|any_alarms": {
+    "seizures": 198,
+    "detected": 56,
+    "sensitivity": 0.2828282828282828,
+    "mean_case_sensitivity": 0.421577380952381,
+    "hours": 225.47194444444443,
+    "false_alarms": 905,
+    "fa_per_hour": 4.01380314624017,
+    "fa_per_24h": 96.3312755097641,
+    "latency_median": 16.40000297734514,
+    "latency_iqr": [
+      7.4750027634436265,
+      44.575001759803854
+    ],
+    "chance": 0.15080134581779295
+  },
+  "FP1-F7|fw|seizure_alarms": {
+    "seizures": 198,
+    "detected": 153,
+    "sensitivity": 0.7727272727272727,
+    "mean_case_sensitivity": 0.8686011904761904,
+    "hours": 225.47194444444443,
+    "false_alarms": 5506,
+    "fa_per_hour": 24.419889638893235,
+    "fa_per_24h": 586.0773513334377,
+    "latency_median": 23.295000000000073,
+    "latency_iqr": [
+      2.7899999999999636,
+      53.960000000000036
+    ],
+    "chance": 0.6148761322287669
+  },
+  "FP1-F7|fw|any_alarms": {
+    "seizures": 198,
+    "detected": 183,
+    "sensitivity": 0.9242424242424242,
+    "mean_case_sensitivity": 0.9456101190476192,
+    "hours": 225.47194444444443,
+    "false_alarms": 6458,
+    "fa_per_hour": 28.642144440242014,
+    "fa_per_24h": 687.4114665658083,
+    "latency_median": 32.059999999999945,
+    "latency_iqr": [
+      7.4525000000001,
+      54.81000000000017
+    ],
+    "chance": 0.6711974122034052
+  },
+  "FP1-FP2|py|seizure_alarms": {
+    "seizures": 194,
+    "detected": 11,
+    "sensitivity": 0.05670103092783505,
+    "mean_case_sensitivity": 0.09598214285714286,
+    "hours": 220.46833333333333,
+    "false_alarms": 71,
+    "fa_per_hour": 0.3220417142295568,
+    "fa_per_24h": 7.729001141509363,
+    "latency_median": 26.300002965610474,
+    "latency_iqr": [
+      15.800000522751361,
+      33.95000213175081
+    ],
+    "chance": 0.013248920212211425
+  },
+  "FP1-FP2|py|any_alarms": {
+    "seizures": 194,
+    "detected": 41,
+    "sensitivity": 0.211340206185567,
+    "mean_case_sensitivity": 0.25205853174603177,
+    "hours": 220.46833333333333,
+    "false_alarms": 622,
+    "fa_per_hour": 2.821266848602596,
+    "fa_per_24h": 67.7104043664623,
+    "latency_median": 28.400002183392644,
+    "latency_iqr": [
+      15.300002427306026,
+      51.600000633858144
+    ],
+    "chance": 0.10935737577377552
+  },
+  "FP1-FP2|fw|seizure_alarms": {
+    "seizures": 194,
+    "detected": 146,
+    "sensitivity": 0.7525773195876289,
+    "mean_case_sensitivity": 0.877281746031746,
+    "hours": 220.46833333333333,
+    "false_alarms": 4032,
+    "fa_per_hour": 18.288340729205252,
+    "fa_per_24h": 438.92017750092606,
+    "latency_median": 14.507500000000164,
+    "latency_iqr": [
+      1.6000000000000796,
+      47.68625000000003
+    ],
+    "chance": 0.5154763444714681
+  },
+  "FP1-FP2|fw|any_alarms": {
+    "seizures": 194,
+    "detected": 165,
+    "sensitivity": 0.8505154639175257,
+    "mean_case_sensitivity": 0.9275049603174604,
+    "hours": 220.46833333333333,
+    "false_alarms": 5507,
+    "fa_per_hour": 24.978643947354495,
+    "fa_per_24h": 599.4874547365079,
+    "latency_median": 14.6550000000002,
+    "latency_iqr": [
+      0.30000000000001137,
+      35.289999999999964
+    ],
+    "chance": 0.6243467176703158
+  },
+  "FP2-F8|py|seizure_alarms": {
+    "seizures": 198,
+    "detected": 9,
+    "sensitivity": 0.045454545454545456,
+    "mean_case_sensitivity": 0.08283730158730158,
+    "hours": 225.47194444444443,
+    "false_alarms": 129,
+    "fa_per_hour": 0.5721332661491514,
+    "fa_per_24h": 13.731198387579633,
+    "latency_median": 15.50000035064295,
+    "latency_iqr": [
+      10.30000028712675,
+      35.600002446211874
+    ],
+    "chance": 0.02329538481538166
+  },
+  "FP2-F8|py|any_alarms": {
+    "seizures": 198,
+    "detected": 58,
+    "sensitivity": 0.29292929292929293,
+    "mean_case_sensitivity": 0.4028521825396825,
+    "hours": 225.47194444444443,
+    "false_alarms": 864,
+    "fa_per_hour": 3.8319623407198975,
+    "fa_per_24h": 91.96709617727754,
+    "latency_median": 19.500001695472747,
+    "latency_iqr": [
+      10.800002860836685,
+      42.650003040907905
+    ],
+    "chance": 0.14456260245855967
+  },
+  "FP2-F8|fw|seizure_alarms": {
+    "seizures": 198,
+    "detected": 164,
+    "sensitivity": 0.8282828282828283,
+    "mean_case_sensitivity": 0.8828125,
+    "hours": 225.47194444444443,
+    "false_alarms": 5590,
+    "fa_per_hour": 24.792441533129892,
+    "fa_per_24h": 595.0185967951174,
+    "latency_median": 28.68249999999989,
+    "latency_iqr": [
+      3.974999999999966,
+      55.921249999999986
+    ],
+    "chance": 0.6202353652703416
+  },
+  "FP2-F8|fw|any_alarms": {
+    "seizures": 198,
+    "detected": 180,
+    "sensitivity": 0.9090909090909091,
+    "mean_case_sensitivity": 0.9406994047619047,
+    "hours": 225.47194444444443,
+    "false_alarms": 6487,
+    "fa_per_hour": 28.77076354658562,
+    "fa_per_24h": 690.4983251180549,
+    "latency_median": 23.384999999999962,
+    "latency_iqr": [
+      2.6712500000000006,
+      50.17500000000041
+    ],
+    "chance": 0.6727694053518699
+  },
+  "signal_stats": {
+    "FP1-F7": {
+      "artifact_epochs": 99479,
+      "ictal_artifact_frac": 0.001848540083227293,
+      "interictal_artifact_frac": 0.01241590427505911,
+      "ticks": 8011736,
+      "adc_clip_frac_mean": 7.349206028650707e-06,
+      "time_in_state_py": [
+        0.9916415707073573,
+        0.0026885582966885532,
+        0.00046557296239076797,
+        0.005204298033563951
+      ],
+      "time_in_state_fw": [
+        0.9016718664354197,
+        0.005177768105941701,
+        0.002759556789479456,
+        0.09039080866915869
+      ]
+    },
+    "FP1-FP2": {
+      "artifact_epochs": 864,
+      "ictal_artifact_frac": 8.680254157841742e-05,
+      "interictal_artifact_frac": 0.00010926226731231199,
+      "ticks": 7930396,
+      "adc_clip_frac_mean": 2.7956036200966723e-06,
+      "time_in_state_py": [
+        0.993073512448485,
+        0.0021645026103231453,
+        0.0003209337328812706,
+        0.004441051208310806
+      ],
+      "time_in_state_fw": [
+        0.9522638182671621,
+        0.005203641681653016,
+        0.0014236341054525508,
+        0.04110890594573269
+      ]
+    },
+    "FP2-F8": {
+      "artifact_epochs": 83077,
+      "ictal_artifact_frac": 0.0017023764487395536,
+      "interictal_artifact_frac": 0.010366474556864765,
+      "ticks": 8028138,
+      "adc_clip_frac_mean": 4.5895019888463814e-06,
+      "time_in_state_py": [
+        0.991444909408554,
+        0.002621451726772384,
+        0.00043613366233417514,
+        0.005497505202339605
+      ],
+      "time_in_state_fw": [
+        0.8963570835686365,
+        0.005149530417032505,
+        0.0029855565345799444,
+        0.09550782947975102
+      ]
+    }
+  },
+  "feature_auc": {
+    "Line-length": {
+      "pooled_auc": 0.6703780318659733,
+      "median_case_auc": 0.8163233315459935,
+      "cases": 24,
+      "ictal_median": 120.95703125,
+      "interictal_median": 67.40234375
+    },
+    "Delta/alpha ratio": {
+      "pooled_auc": 0.4532661981584636,
+      "median_case_auc": 0.4720183253543887,
+      "cases": 24,
+      "ictal_median": 14.310376167297363,
+      "interictal_median": 17.62655258178711
+    },
+    "High-freq energy": {
+      "pooled_auc": 0.48021649483545603,
+      "median_case_auc": 0.4754219284888774,
+      "cases": 24,
+      "ictal_median": 0.011401116847991943,
+      "interictal_median": 0.011619494296610355
+    },
+    "Firmware abs(x\u2212EMA)": {
+      "pooled_auc": 0.6535072697801421,
+      "median_case_auc": 0.7682483345315252,
+      "cases": 24,
+      "ictal_median": 51.20000076293945,
+      "interictal_median": 25.649999618530273
+    }
+  },
+  "example_record": "chb03_02",
+  "n_patients": 24,
+  "n_recordings": 165,
+  "primary_channel": "FP1-F7"
+}

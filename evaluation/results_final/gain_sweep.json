@@ -1,0 +1,236 @@
+{
+  "500.0": {
+    "py": {
+      "seizures": 194,
+      "detected": 0,
+      "sensitivity": 0.0,
+      "mean_case_sensitivity": 0.0,
+      "hours": 220.46833333333333,
+      "false_alarms": 53,
+      "fa_per_hour": 0.24039733597417617,
+      "fa_per_24h": 5.769536063380229,
+      "latency_median": NaN,
+      "latency_iqr": [
+        NaN,
+        NaN
+      ],
+      "chance": 0.00990986710301313
+    },
+    "fw": {
+      "seizures": 194,
+      "detected": 100,
+      "sensitivity": 0.5154639175257731,
+      "mean_case_sensitivity": 0.6442956349206349,
+      "hours": 220.46833333333333,
+      "false_alarms": 1622,
+      "fa_per_hour": 7.357065640568185,
+      "fa_per_24h": 176.5695753736364,
+      "latency_median": 12.979999999999961,
+      "latency_iqr": [
+        4.403750000000002,
+        45.91625000000003
+      ],
+      "chance": 0.25778290010252913
+    },
+    "llr_cv": {
+      "1.0": {
+        "chosen": [
+          [
+            0,
+            2.0,
+            15
+          ],
+          [
+            1,
+            6.0,
+            2
+          ]
+        ],
+        "seizures": 194,
+        "detected": 53,
+        "sensitivity": 0.27319587628865977,
+        "mean_case_sensitivity": 0.38883928571428567,
+        "hours": 220.46833333333333,
+        "false_alarms": 217,
+        "fa_per_hour": 0.9842683378565327,
+        "fa_per_24h": 23.622440108556784,
+        "latency_median": 20.0,
+        "latency_iqr": [
+          14.0,
+          34.0
+        ]
+      },
+      "0.5": {
+        "chosen": [
+          [
+            0,
+            2.5,
+            15
+          ],
+          [
+            1,
+            3.5,
+            10
+          ]
+        ],
+        "seizures": 194,
+        "detected": 47,
+        "sensitivity": 0.2422680412371134,
+        "mean_case_sensitivity": 0.36989087301587303,
+        "hours": 220.46833333333333,
+        "false_alarms": 104,
+        "fa_per_hour": 0.4717230743644212,
+        "fa_per_24h": 11.321353784746108,
+        "latency_median": 25.0,
+        "latency_iqr": [
+          17.5,
+          41.0
+        ]
+      },
+      "0.2": {
+        "chosen": [
+          [
+            0,
+            3.0,
+            15
+          ],
+          [
+            1,
+            5.0,
+            10
+          ]
+        ],
+        "seizures": 194,
+        "detected": 37,
+        "sensitivity": 0.19072164948453607,
+        "mean_case_sensitivity": 0.3122271825396825,
+        "hours": 220.46833333333333,
+        "false_alarms": 55,
+        "fa_per_hour": 0.24946893355810737,
+        "fa_per_24h": 5.987254405394577,
+        "latency_median": 27.0,
+        "latency_iqr": [
+          19.0,
+          44.0
+        ]
+      }
+    }
+  },
+  "2000.0": {
+    "py": {
+      "seizures": 194,
+      "detected": 26,
+      "sensitivity": 0.13402061855670103,
+      "mean_case_sensitivity": 0.13658234126984126,
+      "hours": 220.46833333333333,
+      "false_alarms": 351,
+      "fa_per_hour": 1.5920653759799215,
+      "fa_per_24h": 38.209569023518114,
+      "latency_median": 28.600000388454646,
+      "latency_iqr": [
+        18.22500122420024,
+        43.8250017502578
+      ],
+      "chance": 0.06351980069910092
+    },
+    "fw": {
+      "seizures": 194,
+      "detected": 167,
+      "sensitivity": 0.8608247422680413,
+      "mean_case_sensitivity": 0.925248015873016,
+      "hours": 220.46833333333333,
+      "false_alarms": 5372,
+      "fa_per_hour": 24.366311110439142,
+      "fa_per_24h": 584.7914666505394,
+      "latency_median": 18.97499999999991,
+      "latency_iqr": [
+        1.0499999999999474,
+        39.910000000000025
+      ],
+      "chance": 0.6155611588299671
+    },
+    "llr_cv": {
+      "1.0": {
+        "chosen": [
+          [
+            0,
+            2.0,
+            15
+          ],
+          [
+            1,
+            6.0,
+            2
+          ]
+        ],
+        "seizures": 194,
+        "detected": 53,
+        "sensitivity": 0.27319587628865977,
+        "mean_case_sensitivity": 0.38883928571428567,
+        "hours": 220.46833333333333,
+        "false_alarms": 211,
+        "fa_per_hour": 0.9570535451047392,
+        "fa_per_24h": 22.96928508251374,
+        "latency_median": 20.0,
+        "latency_iqr": [
+          14.0,
+          34.0
+        ]
+      },
+      "0.5": {
+        "chosen": [
+          [
+            0,
+            2.5,
+            15
+          ],
+          [
+            1,
+            3.5,
+            10
+          ]
+        ],
+        "seizures": 194,
+        "detected": 47,
+        "sensitivity": 0.2422680412371134,
+        "mean_case_sensitivity": 0.36989087301587303,
+        "hours": 220.46833333333333,
+        "false_alarms": 103,
+        "fa_per_hour": 0.4671872755724556,
+        "fa_per_24h": 11.212494613738935,
+        "latency_median": 25.0,
+        "latency_iqr": [
+          17.5,
+          41.0
+        ]
+      },
+      "0.2": {
+        "chosen": [
+          [
+            0,
+            3.0,
+            15
+          ],
+          [
+            1,
+            5.0,
+            10
+          ]
+        ],
+        "seizures": 194,
+        "detected": 37,
+        "sensitivity": 0.19072164948453607,
+        "mean_case_sensitivity": 0.3122271825396825,
+        "hours": 220.46833333333333,
+        "false_alarms": 54,
+        "fa_per_hour": 0.24493313476614179,
+        "fa_per_24h": 5.878395234387402,
+        "latency_median": 27.0,
+        "latency_iqr": [
+          19.0,
+          44.0
+        ]
+      }
+    }
+  }
+}

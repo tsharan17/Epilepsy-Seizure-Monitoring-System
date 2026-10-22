@@ -1,0 +1,529 @@
+{
+  "channel": "FP1-FP2",
+  "grid": [
+    {
+      "r": 1.5,
+      "D": 2,
+      "sensitivity": 0.8144329896907216,
+      "fa_per_hour": 18.914280962496505,
+      "latency_median": 14.5
+    },
+    {
+      "r": 1.5,
+      "D": 4,
+      "sensitivity": 0.7216494845360825,
+      "fa_per_hour": 12.346444311730332,
+      "latency_median": 10.0
+    },
+    {
+      "r": 1.5,
+      "D": 6,
+      "sensitivity": 0.6391752577319587,
+      "fa_per_hour": 8.513694332519409,
+      "latency_median": 11.0
+    },
+    {
+      "r": 1.5,
+      "D": 8,
+      "sensitivity": 0.5979381443298969,
+      "fa_per_hour": 6.585979845934034,
+      "latency_median": 13.0
+    },
+    {
+      "r": 1.5,
+      "D": 10,
+      "sensitivity": 0.5567010309278351,
+      "fa_per_hour": 5.139060031297012,
+      "latency_median": 15.0
+    },
+    {
+      "r": 1.5,
+      "D": 15,
+      "sensitivity": 0.5,
+      "fa_per_hour": 2.9890914039053227,
+      "latency_median": 19.0
+    },
+    {
+      "r": 1.5,
+      "D": 20,
+      "sensitivity": 0.422680412371134,
+      "fa_per_hour": 1.9367860841693063,
+      "latency_median": 25.0
+    },
+    {
+      "r": 2.0,
+      "D": 2,
+      "sensitivity": 0.6907216494845361,
+      "fa_per_hour": 11.348568577497902,
+      "latency_median": 12.0
+    },
+    {
+      "r": 2.0,
+      "D": 4,
+      "sensitivity": 0.5670103092783505,
+      "fa_per_hour": 6.499799668886689,
+      "latency_median": 15.5
+    },
+    {
+      "r": 2.0,
+      "D": 6,
+      "sensitivity": 0.4948453608247423,
+      "fa_per_hour": 4.231900272903894,
+      "latency_median": 15.5
+    },
+    {
+      "r": 2.0,
+      "D": 8,
+      "sensitivity": 0.44329896907216493,
+      "fa_per_hour": 2.8938396292740456,
+      "latency_median": 16.0
+    },
+    {
+      "r": 2.0,
+      "D": 10,
+      "sensitivity": 0.38144329896907214,
+      "fa_per_hour": 2.1635760237675856,
+      "latency_median": 15.5
+    },
+    {
+      "r": 2.0,
+      "D": 15,
+      "sensitivity": 0.3247422680412371,
+      "fa_per_hour": 1.124878100407466,
+      "latency_median": 21.0
+    },
+    {
+      "r": 2.0,
+      "D": 20,
+      "sensitivity": 0.28350515463917525,
+      "fa_per_hour": 0.7211920079225286,
+      "latency_median": 27.0
+    },
+    {
+      "r": 2.5,
+      "D": 2,
+      "sensitivity": 0.5618556701030928,
+      "fa_per_hour": 7.152954694929733,
+      "latency_median": 19.0
+    },
+    {
+      "r": 2.5,
+      "D": 4,
+      "sensitivity": 0.4690721649484536,
+      "fa_per_hour": 3.791927790083232,
+      "latency_median": 17.0
+    },
+    {
+      "r": 2.5,
+      "D": 6,
+      "sensitivity": 0.39690721649484534,
+      "fa_per_hour": 2.2452204020229662,
+      "latency_median": 16.0
+    },
+    {
+      "r": 2.5,
+      "D": 8,
+      "sensitivity": 0.35051546391752575,
+      "fa_per_hour": 1.4514556134289882,
+      "latency_median": 18.0
+    },
+    {
+      "r": 2.5,
+      "D": 10,
+      "sensitivity": 0.31958762886597936,
+      "fa_per_hour": 1.047769520944051,
+      "latency_median": 19.5
+    },
+    {
+      "r": 2.5,
+      "D": 15,
+      "sensitivity": 0.25257731958762886,
+      "fa_per_hour": 0.5352242574519395,
+      "latency_median": 25.0
+    },
+    {
+      "r": 2.5,
+      "D": 20,
+      "sensitivity": 0.22164948453608246,
+      "fa_per_hour": 0.3038985190616944,
+      "latency_median": 30.0
+    },
+    {
+      "r": 3.0,
+      "D": 2,
+      "sensitivity": 0.4948453608247423,
+      "fa_per_hour": 4.721766542436177,
+      "latency_median": 21.5
+    },
+    {
+      "r": 3.0,
+      "D": 4,
+      "sensitivity": 0.3711340206185567,
+      "fa_per_hour": 2.31325738390245,
+      "latency_median": 16.0
+    },
+    {
+      "r": 3.0,
+      "D": 6,
+      "sensitivity": 0.3247422680412371,
+      "fa_per_hour": 1.3153816496700206,
+      "latency_median": 18.0
+    },
+    {
+      "r": 3.0,
+      "D": 8,
+      "sensitivity": 0.27319587628865977,
+      "fa_per_hour": 0.8209795813457715,
+      "latency_median": 19.0
+    },
+    {
+      "r": 3.0,
+      "D": 10,
+      "sensitivity": 0.26288659793814434,
+      "fa_per_hour": 0.5715106477876641,
+      "latency_median": 21.0
+    },
+    {
+      "r": 3.0,
+      "D": 15,
+      "sensitivity": 0.22164948453608246,
+      "fa_per_hour": 0.29029112268579765,
+      "latency_median": 26.0
+    },
+    {
+      "r": 3.0,
+      "D": 20,
+      "sensitivity": 0.18041237113402062,
+      "fa_per_hour": 0.1632887565107612,
+      "latency_median": 31.0
+    },
+    {
+      "r": 3.5,
+      "D": 2,
+      "sensitivity": 0.42783505154639173,
+      "fa_per_hour": 3.3791701000143632,
+      "latency_median": 17.0
+    },
+    {
+      "r": 3.5,
+      "D": 4,
+      "sensitivity": 0.3247422680412371,
+      "fa_per_hour": 1.5467073880602658,
+      "latency_median": 16.0
+    },
+    {
+      "r": 3.5,
+      "D": 6,
+      "sensitivity": 0.28350515463917525,
+      "fa_per_hour": 0.8345869777216682,
+      "latency_median": 18.0
+    },
+    {
+      "r": 3.5,
+      "D": 8,
+      "sensitivity": 0.2422680412371134,
+      "fa_per_hour": 0.5533674526198018,
+      "latency_median": 19.0
+    },
+    {
+      "r": 3.5,
+      "D": 10,
+      "sensitivity": 0.2422680412371134,
+      "fa_per_hour": 0.3447207081893847,
+      "latency_median": 21.0
+    },
+    {
+      "r": 3.5,
+      "D": 15,
+      "sensitivity": 0.18556701030927836,
+      "fa_per_hour": 0.17689615288665794,
+      "latency_median": 26.0
+    },
+    {
+      "r": 3.5,
+      "D": 20,
+      "sensitivity": 0.16494845360824742,
+      "fa_per_hour": 0.12246656738307089,
+      "latency_median": 31.0
+    },
+    {
+      "r": 4.0,
+      "D": 2,
+      "sensitivity": 0.3556701030927835,
+      "fa_per_hour": 2.4538671464533834,
+      "latency_median": 16.0
+    },
+    {
+      "r": 4.0,
+      "D": 4,
+      "sensitivity": 0.29381443298969073,
+      "fa_per_hour": 1.0432337221520853,
+      "latency_median": 16.0
+    },
+    {
+      "r": 4.0,
+      "D": 6,
+      "sensitivity": 0.23195876288659795,
+      "fa_per_hour": 0.5533674526198018,
+      "latency_median": 17.0
+    },
+    {
+      "r": 4.0,
+      "D": 8,
+      "sensitivity": 0.23195876288659795,
+      "fa_per_hour": 0.3447207081893847,
+      "latency_median": 19.0
+    },
+    {
+      "r": 4.0,
+      "D": 10,
+      "sensitivity": 0.2268041237113402,
+      "fa_per_hour": 0.2358615371822106,
+      "latency_median": 20.5
+    },
+    {
+      "r": 4.0,
+      "D": 15,
+      "sensitivity": 0.15979381443298968,
+      "fa_per_hour": 0.1496813601348644,
+      "latency_median": 25.0
+    },
+    {
+      "r": 4.0,
+      "D": 20,
+      "sensitivity": 0.13917525773195877,
+      "fa_per_hour": 0.11339496979913971,
+      "latency_median": 30.0
+    },
+    {
+      "r": 5.0,
+      "D": 2,
+      "sensitivity": 0.28865979381443296,
+      "fa_per_hour": 1.3380606436298486,
+      "latency_median": 14.5
+    },
+    {
+      "r": 5.0,
+      "D": 4,
+      "sensitivity": 0.2268041237113402,
+      "fa_per_hour": 0.5306884586599738,
+      "latency_median": 15.5
+    },
+    {
+      "r": 5.0,
+      "D": 6,
+      "sensitivity": 0.20103092783505155,
+      "fa_per_hour": 0.29482692147776324,
+      "latency_median": 17.0
+    },
+    {
+      "r": 5.0,
+      "D": 8,
+      "sensitivity": 0.1958762886597938,
+      "fa_per_hour": 0.1632887565107612,
+      "latency_median": 19.0
+    },
+    {
+      "r": 5.0,
+      "D": 10,
+      "sensitivity": 0.19072164948453607,
+      "fa_per_hour": 0.12700236617503646,
+      "latency_median": 24.0
+    },
+    {
+      "r": 5.0,
+      "D": 15,
+      "sensitivity": 0.12886597938144329,
+      "fa_per_hour": 0.08618017704734618,
+      "latency_median": 29.0
+    },
+    {
+      "r": 5.0,
+      "D": 20,
+      "sensitivity": 0.10309278350515463,
+      "fa_per_hour": 0.04535798791965588,
+      "latency_median": 32.5
+    },
+    {
+      "r": 6.0,
+      "D": 2,
+      "sensitivity": 0.25257731958762886,
+      "fa_per_hour": 0.8028363861779092,
+      "latency_median": 15.0
+    },
+    {
+      "r": 6.0,
+      "D": 4,
+      "sensitivity": 0.20103092783505155,
+      "fa_per_hour": 0.29482692147776324,
+      "latency_median": 16.0
+    },
+    {
+      "r": 6.0,
+      "D": 6,
+      "sensitivity": 0.16494845360824742,
+      "fa_per_hour": 0.16782455530272677,
+      "latency_median": 17.0
+    },
+    {
+      "r": 6.0,
+      "D": 8,
+      "sensitivity": 0.16494845360824742,
+      "fa_per_hour": 0.09525177463127736,
+      "latency_median": 19.5
+    },
+    {
+      "r": 6.0,
+      "D": 10,
+      "sensitivity": 0.15979381443298968,
+      "fa_per_hour": 0.077108579463415,
+      "latency_median": 22.0
+    },
+    {
+      "r": 6.0,
+      "D": 15,
+      "sensitivity": 0.1134020618556701,
+      "fa_per_hour": 0.02267899395982794,
+      "latency_median": 27.0
+    },
+    {
+      "r": 6.0,
+      "D": 20,
+      "sensitivity": 0.09278350515463918,
+      "fa_per_hour": 0.013607396375896766,
+      "latency_median": 35.5
+    },
+    {
+      "r": 8.0,
+      "D": 2,
+      "sensitivity": 0.19072164948453607,
+      "fa_per_hour": 0.3175059154375912,
+      "latency_median": 15.0
+    },
+    {
+      "r": 8.0,
+      "D": 4,
+      "sensitivity": 0.13917525773195877,
+      "fa_per_hour": 0.11339496979913971,
+      "latency_median": 16.0
+    },
+    {
+      "r": 8.0,
+      "D": 6,
+      "sensitivity": 0.13917525773195877,
+      "fa_per_hour": 0.06803698187948383,
+      "latency_median": 18.0
+    },
+    {
+      "r": 8.0,
+      "D": 8,
+      "sensitivity": 0.12886597938144329,
+      "fa_per_hour": 0.03628639033572471,
+      "latency_median": 20.0
+    },
+    {
+      "r": 8.0,
+      "D": 10,
+      "sensitivity": 0.11855670103092783,
+      "fa_per_hour": 0.02267899395982794,
+      "latency_median": 22.0
+    },
+    {
+      "r": 8.0,
+      "D": 15,
+      "sensitivity": 0.07216494845360824,
+      "fa_per_hour": 0.004535798791965588,
+      "latency_median": 32.5
+    },
+    {
+      "r": 8.0,
+      "D": 20,
+      "sensitivity": 0.05670103092783505,
+      "fa_per_hour": 0.0,
+      "latency_median": 41.0
+    }
+  ],
+  "cv": {
+    "1.0": {
+      "chosen": [
+        [
+          0,
+          2.0,
+          15
+        ],
+        [
+          1,
+          6.0,
+          2
+        ]
+      ],
+      "seizures": 194,
+      "detected": 53,
+      "sensitivity": 0.27319587628865977,
+      "mean_case_sensitivity": 0.38883928571428567,
+      "hours": 220.46833333333333,
+      "false_alarms": 217,
+      "fa_per_hour": 0.9842683378565327,
+      "fa_per_24h": 23.622440108556784,
+      "latency_median": 20.0,
+      "latency_iqr": [
+        14.0,
+        34.0
+      ]
+    },
+    "0.5": {
+      "chosen": [
+        [
+          0,
+          2.5,
+          15
+        ],
+        [
+          1,
+          3.5,
+          10
+        ]
+      ],
+      "seizures": 194,
+      "detected": 47,
+      "sensitivity": 0.2422680412371134,
+      "mean_case_sensitivity": 0.36989087301587303,
+      "hours": 220.46833333333333,
+      "false_alarms": 103,
+      "fa_per_hour": 0.4671872755724556,
+      "fa_per_24h": 11.212494613738935,
+      "latency_median": 25.0,
+      "latency_iqr": [
+        17.5,
+        41.5
+      ]
+    },
+    "0.2": {
+      "chosen": [
+        [
+          0,
+          3.0,
+          15
+        ],
+        [
+          1,
+          5.0,
+          10
+        ]
+      ],
+      "seizures": 194,
+      "detected": 37,
+      "sensitivity": 0.19072164948453607,
+      "mean_case_sensitivity": 0.3122271825396825,
+      "hours": 220.46833333333333,
+      "false_alarms": 55,
+      "fa_per_hour": 0.24946893355810737,
+      "fa_per_24h": 5.987254405394577,
+      "latency_median": 27.0,
+      "latency_iqr": [
+        19.0,
+        44.0
+      ]
+    }
+  }
+}
