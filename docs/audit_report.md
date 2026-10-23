@@ -51,7 +51,7 @@ Title -> "A Low-Cost EEG and Head-Motion Epilepsy Seizure Alarm with Baseline-No
 8. If selected for TCE/associated journal: 4-page version needed.
 
 ## 6. Submission checklist
-- [ ] Decide author check in section 3 (v4 device exists?)
+- [ ] Decide author check in section 3 (EEG device exists?)
 - [ ] Push repo
 - [ ] Compile in Overleaf, confirm 6 pages (US letter)
 - [ ] EDAS N35554 by 30 Oct 2026; names stay on paper; no biography
