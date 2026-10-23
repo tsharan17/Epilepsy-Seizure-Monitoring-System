@@ -1,6 +1,6 @@
 """SeizeIT2 evaluation of the multimodal device detectors (subject-level LOSO, SzCORE scoring).
 
-Detectors (all on signals the v5 firmware computes, 1 value per second):
+Detectors (all on signals the EEG-plus-motion firmware computes, 1 value per second):
   FW      shipped firmware BLACKOUT entries (code-faithful replay, behind-the-ear EEG)
   EEG     DEV-BR on the firmware deviation:   S_e >= log r_e for D_e s
   MOV     MOV-BR on high-passed head acceleration: S_a >= log r_m AND rhythm >= q for D_m s

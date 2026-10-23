@@ -21,9 +21,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "eval" / "evalua
 C_PY, C_FW, C_DEV, C_LL, INK, MUTED, GRID, SZ = "#2a78d6", "#eb6834", "#1baf7a", "#8a8980", "#1f1f1e", "#6b6a64", "#e6e5df", "#dcdbd4"
 plt.rcParams.update({"font.size": 8, "font.family": "DejaVu Sans"})
 R = Path(sys.argv[1])
-F = json.load(open(R / "final.json"))
+F = {"FP1-FP2": {"grid": json.load(open(R / "grid_FP1-FP2.json"))}}   # in-sample grids (rigor grid)
+RG = json.load(open(R / "rigor_FP1-FP2.json"))  # held-out (LOSO) results, nulls
 P = "FP1-FP2"
-f = F[P]["methods"]
+f = RG["methods"]
 out = Path("figures"); out.mkdir(exist_ok=True)
 
 
@@ -52,17 +53,18 @@ for sig, col, lab in (("LL", C_LL, "LL-BR"), ("DEV", C_DEV, "DEV-BR")):
     pts = pts[pts[:, 0] > 0]
     fr = front(pts)
     ax.plot(fr[:, 0], fr[:, 1], color=col, linewidth=1.3, label=f"{lab} (all settings, in-sample)")
-cv = np.array([(f[k]["fa_per_hour"], 100 * f[k]["sensitivity"]) for k in ("DEV_1.0", "DEV_0.5", "DEV_0.2")])
+cv = np.array([(f[k]["fa_per_hour"], 100 * f[k]["sensitivity"]) for k in ("loso_DEV_1.0", "loso_DEV_0.5", "loso_DEV_0.2")])
 ax.scatter(cv[:, 0], cv[:, 1], marker="D", s=24, facecolor="white", edgecolor=C_DEV, linewidth=1.3, zorder=6,
-           label="DEV-BR, held-out patients")
-for k, col, name in (("py_blackout", C_PY, "Analyzer BLACKOUT (shipped)"), ("py_any", C_PY, None),
-                     ("fw_blackout", C_FW, "Firmware BLACKOUT (shipped)")):
+           label="DEV-BR, held-out subjects (LOSO)")
+for k, col, name in (("py_blackout", C_PY, "Analyzer BLACKOUT (initial)"), ("py_any", C_PY, None),
+                     ("fw_blackout", C_FW, "Firmware BLACKOUT (initial)")):
     v = f[k]
     ax.scatter([v["fa_per_hour"]], [100 * v["sensitivity"]], s=40, color=col, zorder=7, edgecolor="white",
-               linewidth=1.1, marker="o" if k != "py_any" else "s", label=name or "Analyzer any alarm (shipped)")
-    ax.plot([v["fa_per_hour"]] * 2, [100 * v["chance"], 100 * v["sensitivity"]], color=col, linewidth=0.7,
+               linewidth=1.1, marker="o" if k != "py_any" else "s", label=name or "Analyzer any alarm (initial)")
+    nm = RG["nulls"][k]["null_mean"]
+    ax.plot([v["fa_per_hour"]] * 2, [100 * nm, 100 * v["sensitivity"]], color=col, linewidth=0.7,
             linestyle=":", zorder=5)
-    ax.scatter([v["fa_per_hour"]], [100 * v["chance"]], s=28, marker="_", color=col, zorder=7, linewidth=1.5)
+    ax.scatter([v["fa_per_hour"]], [100 * nm], s=28, marker="_", color=col, zorder=7, linewidth=1.5)
 ax.set_xscale("log"); ax.set_xlim(0.05, 40); ax.set_ylim(0, 100)
 ax.set_xlabel("False alarms per hour", fontsize=8); ax.set_ylabel("Seizures detected (%)", fontsize=8)
 style(ax)
@@ -70,16 +72,16 @@ ax.legend(frameon=False, fontsize=5.9, loc="upper left", handletextpad=0.3, bord
 fig.tight_layout(pad=0.3); fig.savefig(out / "operating_curve.png", dpi=300); plt.close(fig)
 
 # ── 2. per-patient sensitivity ──────────────────────────────────────────────
-cases = sorted(f["DEV_1.0"]["per_case"])
+cases = sorted(f["loso_DEV_1.0"]["per_subject"])
 def sens(k):
-    pc = f[k]["per_case"]; return [100 * pc[c]["n_det"] / pc[c]["n_sz"] if c in pc else np.nan for c in cases]
+    pc = f[k]["per_subject"]; return [100 * pc[c]["n_det"] / pc[c]["n_sz"] if c in pc and pc[c]["n_sz"] else np.nan for c in cases]
 x = np.arange(len(cases)); w = 0.27
 fig, ax = plt.subplots(figsize=(7.1, 1.75))
-for off, k, col, lab in ((-w, "py_any", C_PY, f"Analyzer, any alarm (shipped; {f['py_any']['fa_per_hour']:.2f} FA/h)"),
-                         (0, "DEV_1.0", C_DEV, f"DEV-BR, held-out ({f['DEV_1.0']['fa_per_hour']:.2f} FA/h)"),
-                         (w, "fw_blackout", C_FW, f"Firmware BLACKOUT (shipped; {f['fw_blackout']['fa_per_hour']:.1f} FA/h)")):
+for off, k, col, lab in ((-w, "py_any", C_PY, f"Analyzer, any alarm (existing; {f['py_any']['fa_per_hour']:.2f} FA/h)"),
+                         (0, "loso_DEV_1.0", C_DEV, f"DEV-BR, held-out ({f['loso_DEV_1.0']['fa_per_hour']:.2f} FA/h)"),
+                         (w, "fw_blackout", C_FW, f"Firmware BLACKOUT (existing; {f['fw_blackout']['fa_per_hour']:.1f} FA/h)")):
     ax.bar(x + off, sens(k), w - 0.04, color=col, label=lab)
-ax.set_xticks(x); ax.set_xticklabels(cases, rotation=60, fontsize=6.5, ha="right", rotation_mode="anchor")
+ax.set_xticks(x); ax.set_xticklabels([c.replace("chb01", "chb01+21") for c in cases], rotation=60, fontsize=6.5, ha="right", rotation_mode="anchor")
 ax.set_ylabel("Sensitivity (%)", fontsize=7.5); ax.set_ylim(0, 100)
 style(ax)
 ax.legend(frameon=False, fontsize=6.5, ncol=3, loc="lower left", bbox_to_anchor=(0, 1.0), handletextpad=0.4)
@@ -90,7 +92,8 @@ import personalize as PZ
 rows = [json.loads(l) for l in (R / "records.jsonl").read_text().splitlines() if l.strip()]
 rows = [r for r in rows if r["channel"] == P and not r.get("missing") and r["seizures"]]
 r_, D_ = None, None
-rr, D = f["DEV_1.0"]["chosen"][0][1], f["DEV_1.0"]["chosen"][0][2]
+from collections import Counter
+rr, D = Counter((c["r"], c["D"]) for c in RG["choices"]["loso_DEV_1.0"]).most_common(1)[0][0]
 th = np.log(rr)
 for r in sorted(rows, key=lambda r: r["record"]):
     on, off = r["seizures"][0]

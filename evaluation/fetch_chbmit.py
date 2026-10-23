@@ -132,8 +132,8 @@ def extract(buf: bytes, source: str, out_dir: Path, name: str):
         meta["dig_min"].append(H["dmin"][i]); meta["dig_max"].append(H["dmax"][i])
         meta["derived"].append(f"{H['labels'][i]} - {H['labels'][j]}")
         fs = H["nsamp"][i] / H["dur"]
-    # Vera's own montage: FP1 − FP2, reconstructed exactly as a signed sum of a
-    # chain of bipolar channels (e.g. FP1-F7, F7-T7, T7-FT9, FT9-FT10, FT10-T8, F8-T8, FP2-F8)
+    # Device montage FP1 − FP2, derived as a signed sum of a
+    # chain of bipolar channels (exact only if all channels share one reference) (e.g. FP1-F7, F7-T7, T7-FT9, FT9-FT10, FT10-T8, F8-T8, FP2-F8)
     chain = _bipolar_path(up, "FP1", "FP2")
     if chain:
         g = lambda k: (H["pmax"][k] - H["pmin"][k]) / (H["dmax"][k] - H["dmin"][k])

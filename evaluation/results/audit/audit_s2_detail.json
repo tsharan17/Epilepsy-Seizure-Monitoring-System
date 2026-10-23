@@ -1,0 +1,48 @@
+{
+ "0.02": {
+  "det": 38,
+  "n": 52,
+  "lat_median": 72.0,
+  "lat_iqr": [
+   47.5,
+   97.25
+  ],
+  "sleep_det": 20,
+  "sleep_n": 25,
+  "subjects": 115,
+  "zero_fa_subjects": 59,
+  "modal_choices": [
+   [
+    "(6.0, 3.0, 30)",
+    110
+   ],
+   [
+    "(4.0, 8.0, 30)",
+    3
+   ],
+   [
+    "(6.0, 4.0, 30)",
+    2
+   ]
+  ]
+ },
+ "0.05": {
+  "det": 46,
+  "n": 52,
+  "lat_median": 64.0,
+  "lat_iqr": [
+   44.25,
+   79.0
+  ],
+  "sleep_det": 21,
+  "sleep_n": 25,
+  "subjects": 115,
+  "zero_fa_subjects": 36,
+  "modal_choices": [
+   [
+    "(4.0, 3.0, 30)",
+    115
+   ]
+  ]
+ }
+}

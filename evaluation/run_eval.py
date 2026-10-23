@@ -2,7 +2,7 @@
 Replay CHB-MIT through both Vera detectors and store per-record results.
 
 usage:
-  python run_eval.py --data ../data/chbmit --monitor ../seizure_monitor.py \
+  python run_eval.py --data ../data/chbmit --monitor ../analyzer/seizure_monitor.py \
                      --out results/records.jsonl [--channels FP1-F7 FP2-F8] [--jobs 2]
 """
 from __future__ import annotations
